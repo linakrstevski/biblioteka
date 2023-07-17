@@ -1,7 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-  <img src="{{$book->img}}" alt="">
+@extends('_layout.cork')
+
+@section('content')
+<head><style>
+ body{
+    margin-top: 20px;
+    margin-right:20px;
+  }
+.left{
+  margin-right: 20px;
+  float: left;
+};
+.right {
+  float: right;
+}
+
+</style></head>
+<div class="left">
+  <img src="{{$book->img}}" alt="" width="200px" height="300px">
+</div>
+<div class="right">
 <h1>{{$book->title}}</h1>
 <h1>Категорија: {{$book->kategorii->title}}</h1>
 
@@ -15,7 +32,7 @@
     <li> <a href="{{route('avtor.prikazi', ['authorId' => $pisatel->id])}}">{{$pisatel->name}}</a> </li>
     @endforeach
 </ul>
+</div>
 @endif
 
-</body>
-</html>
+@endsection
