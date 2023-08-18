@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-md-12 align-self-center order-md-0 order-1">
                                 <div class="faq-header-content">
-                                    <h1 class="mb-4">Knowledge Base</h1>
+                                    <h1 class="mb-4">Библиотека</h1>
                                     <div class="row">
                                         <div class="col-lg-5 mx-auto">
                                             <div class="autocomplete-btn">
@@ -219,7 +219,9 @@
                                                 <div class="media-body">
                                                     <h4 class="media-heading mb-1">David Andrason</h4>
                                                     <p class="media-text">07 July</p>
+                                                    
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>

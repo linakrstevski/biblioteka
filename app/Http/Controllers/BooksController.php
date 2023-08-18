@@ -12,6 +12,7 @@ class BooksController extends Controller
      */
     public function index()
     {
+        
         // $url='http://localhost:8888/biblioteka/public/book';
         $data['books'] = Books::all();
         return view('books.list', $data);

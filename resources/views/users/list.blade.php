@@ -4,7 +4,7 @@
 <ul>
 @foreach($users as $user)
 <li> 
-    {{$user->firstName}}
+    {{$user->name}}
     {{$user->lastName}}
     ({{$user->email}})
 </li>

@@ -25,6 +25,7 @@
     <link href="{{asset('assets/src/assets/css/light/pages/knowledge_base.css')}}" rel="stylesheet" type="text/css" /> 
     <link href="{{asset('assets/src/assets/css/dark/pages/knowledge_base.css')}}" rel="stylesheet" type="text/css" /> 
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    @bukStyles
 </head>
 <body class=" layout-boxed">
 
@@ -47,7 +48,7 @@
                     </a>
                 </li>
                 <li class="nav-item theme-text">
-                    <a href="index.html" class="nav-link"> CORK </a>
+                    <a href="{{ route('public')}}" class="nav-link"> CORK </a>
                 </li>
             </ul>
 
@@ -198,52 +199,61 @@
                     </div>
                     
                 </li>
-
+                <?php if(!Auth::user()) : ?>
+               
+                    <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
+                                <a href="{{ route('login')}}">Најави се</a>                  
+                </li>
                 <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
+                                <a href="{{ route('register-user')}}">Регистрирај се</a>                  
+                </li>
+                
+                <?php else : ?>
+                    <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
+                    
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="avatar-container">
                             <div class="avatar avatar-sm avatar-indicators avatar-online">
-                                <img alt="avatar" src="{{asset('assets/src/assets/img/profile-30.png')}}" class="rounded-circle">
+                            <img alt="avatar" src="https://0.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" class="rounded-circle">  
                             </div>
                         </div>
                     </a>
 
                     <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
-                        <div class="user-profile-section">
+                    <img alt="avatar" src="https://0.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" class="rounded-circle">
+
+
+                    <div class="user-profile-section">
                             <div class="media mx-auto">
                                 <div class="emoji me-2">
                                     &#x1F44B;
                                 </div>
                                 <div class="media-body">
-                                    <h5>Shaun Park</h5>
+                                
                                     <p>Project Leader</p>
                                 </div>
                             </div>
+                            <h5>{{Auth::user()->name}}
+                              {{Auth::user()->surname}}</h5>
                         </div>
                         <div class="dropdown-item">
-                            <a href="user-profile.html">
+                            <a href="{{ route('profile.twofa') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>Profile</span>
                             </a>
                         </div>
                         <div class="dropdown-item">
-                            <a href="app-mailbox.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg> <span>Inbox</span>
-                            </a>
-                        </div>
-                        <div class="dropdown-item">
-                            <a href="auth-boxed-lockscreen.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> <span>Lock Screen</span>
-                            </a>
-                        </div>
-                        <div class="dropdown-item">
-                            <a href="auth-boxed-signin.html">
+                            <a href="{{ route('signout') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> <span>Log Out</span>
                             </a>
                         </div>
                     </div>
                     
                 </li>
+                <?php endif; ?>
+            
+               
             </ul>
+            
         </header>
     </div>
     <!--  END NAVBAR  -->
@@ -312,7 +322,19 @@
                      
                        
                     </li>
-
+                    <li class="menu">
+                    <a href="{{ route('login')}}" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                                <span>Најава</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                     
+                       
+                    </li>
         
 
                     <li class="menu active">
@@ -513,5 +535,6 @@
     <script src="{{asset('assets/src/plugins/src/autocomplete/autoComplete.min.js')}}"></script>
     <script src="{{asset('assets/src/assets/js/pages/knowledge-base.js')}}"></script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    @bukScripts
 </body>
 </html>
