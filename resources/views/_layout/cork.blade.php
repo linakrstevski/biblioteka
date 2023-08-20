@@ -199,7 +199,7 @@
                     </div>
                     
                 </li>
-                <?php if(!Auth::user()) : ?>
+                @if(!Auth::user()) 
                
                     <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                                 <a href="{{ route('login')}}">Најави се</a>                  
@@ -208,7 +208,7 @@
                                 <a href="{{ route('register-user')}}">Регистрирај се</a>                  
                 </li>
                 
-                <?php else : ?>
+                @else
                     <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                     
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -249,8 +249,7 @@
                     </div>
                     
                 </li>
-                <?php endif; ?>
-            
+                @endif
                
             </ul>
             
@@ -322,19 +321,7 @@
                      
                        
                     </li>
-                    <li class="menu">
-                    <a href="{{ route('login')}}" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                                <span>Најава</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                     
-                       
-                    </li>
+                   
         
 
                     <li class="menu active">

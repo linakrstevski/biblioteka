@@ -25,6 +25,7 @@ Route::get('/knigi', [App\Http\Controllers\BooksController::class,'index'])->nam
 Route::get('/kniga/{bookId}', [App\Http\Controllers\BooksController::class,'show'])->name('kniga.prikazi');
 
 Route::get('/users', [App\Http\Controllers\UserController::class,'index'])->name('user.prikazi');
+Route::get('/korisnik/{userId}', [App\Http\Controllers\UserController::class,'show'])->name('korisnik.prikazi');
 
 Route::get('/author', [App\Http\Controllers\AuthorsController::class,'index'])->name('allAuthors.show');
 Route::get('/avtor/{authorId}', [App\Http\Controllers\AuthorsController::class,'show'])->name('avtor.prikazi');
@@ -50,3 +51,5 @@ Route::post('/profile/2fa', [App\Http\Controllers\ProfileController::class, 'two
 
 Route::get('/login/otp', 'App\Http\Controllers\OTPController@show')->name('otp.show');
 Route::post('/login/otp', 'App\Http\Controllers\OTPController@check');
+
+Route::get('/rent', [App\Http\Controllers\RentController::class, 'rent'])->name('rent');
