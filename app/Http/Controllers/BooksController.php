@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Books;
+use App\Models\Users;
+use App\Models\Rent;
+use App\Models\RentRead;
+
+
 
 class BooksController extends Controller
 {
@@ -15,6 +20,8 @@ class BooksController extends Controller
         
         // $url='http://localhost:8888/biblioteka/public/book';
         $data['books'] = Books::all();
+        $data['users'] = Users::all();
+
         return view('books.list', $data);
 
     }
@@ -22,9 +29,28 @@ class BooksController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request, $book)
     {
-        //
+        { 
+            $request->validate([
+            'user' => 'required'
+        ]);
+       
+    
+        foreach ($request->user as $user) {
+            $rent = new Rent;
+            $rent->book_id = $book;
+            $rent->user_id = $user;
+        
+        $rent->save();
+        }
+        
+       
+            return redirect()->back()->with('success', 'All books rented successfully');
+    
+        
+    }
+    
     }
 
     /**
@@ -38,9 +64,12 @@ class BooksController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($bookId)
+    public function show( $bookId)
     {
+                
+       $data['rent'] = RentRead::where('book_id', $bookId)->get();
         $data['book'] = Books::find($bookId);
+        $data['users'] = Users::all();
         return view('books.show', $data); 
     }
 
